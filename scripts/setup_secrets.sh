@@ -24,4 +24,4 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member="serviceAccount:zeta-sa@$PROJECT_ID.iam.gserviceaccount.com" \
     --role="roles/logging.logWriter"
-echo "✅ Secrets and service account created"
+echo " Secrets and service account created"
