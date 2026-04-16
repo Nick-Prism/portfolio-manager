@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  agent-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    restart: unless-stopped
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - ZERODHA_API_KEY=${ZERODHA_API_KEY}
+      - ZERODHA_API_SECRET=${ZERODHA_API_SECRET}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - LLM_API_KEY=${LLM_API_KEY}
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    networks:
+      - zeta-net
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile.dashboard
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+    command: streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+    networks:
+      - zeta-net
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - zeta-net
+
+networks:
+  zeta-net:
+    driver: bridge
