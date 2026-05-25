@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+
+  agent-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - SKIP_TELEGRAM_BOT=true
+    networks:
+      - zeta-net
+
+  telegram-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    restart: unless-stopped
+    env_file: .env
+    command: python bot/telegram_bot.py
+    networks:
+      - zeta-net
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    env_file: .env
+    command: streamlit run ui/app.py --server.port 8501 --server.address 0.0.0.0
+    networks:
+      - zeta-net
+
+networks:
+  zeta-net:
+    driver: bridge

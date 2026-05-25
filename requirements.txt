@@ -1,0 +1,57 @@
+# Zeta AI Portfolio Manager — Unified requirements (all branches merged)
+
+# Agent orchestration
+langgraph>=0.2.0
+langchain-core>=0.2.0
+
+# LLM providers
+litellm>=1.40.0
+
+# Technical analysis (ta replaces pandas-ta which was removed from PyPI)
+ta>=0.11.0
+pandas>=2.0.0
+numpy>=1.26.0
+
+# Data fetching
+yfinance>=0.2.40
+
+# Web scraping (fundamental agent + Screener.in)
+httpx>=0.27.0
+beautifulsoup4>=4.12.0
+
+# News ingestion
+feedparser>=6.0.11
+
+# MongoDB (P3 database layer)
+motor>=3.5.0
+pymongo>=4.8.0
+
+# Scheduling
+APScheduler>=3.10.0
+
+# Data validation
+pydantic>=2.0.0
+
+# Async
+anyio>=4.0.0
+
+# Environment / config
+python-dotenv>=1.0.0
+
+# Zerodha MCP (P1 infrastructure)
+kiteconnect>=5.0.1
+mcp>=1.0.0
+fastmcp>=0.1.0
+
+# Telegram bot (UI)
+python-telegram-bot>=21.0.0
+
+# Dashboard (UI)
+streamlit>=1.37.0
+plotly>=5.22.0
+fastapi>=0.111.0
+uvicorn>=0.30.0
+
+# GCP (P1 infrastructure — optional, only needed on VM)
+google-cloud-logging>=3.10.0
+google-cloud-secret-manager>=2.20.0
